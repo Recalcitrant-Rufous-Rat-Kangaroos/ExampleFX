@@ -22,49 +22,42 @@ import java.util.ResourceBundle;
 
 
 public class RootController extends Application {
-    @FXML private Button myButton;
-    @FXML private TextArea text;
 
+    //A static list of all of our controllers. These will be accessible through a getter method
    private static ArrayList<PageController> controllers = new ArrayList<PageController>();
 
-    FXMLLoader loader1 = new FXMLLoader();
-    FXMLLoader loader2 = new FXMLLoader();
-
-    Stage stage;
-    StackPane defaultRoot = new StackPane();
-    Parent root1;
-    Parent root2;
-
+    //This method calls the launch() function that is included in the application class. I am not sure
+    // exactly what launch all does, but I am pretty sure it calls the start() method down below. Basically, we call it
+    // when we want to start our application
     public static void launchScene(String[] args){
         launch(args);
     }
 
+    //start() is an overridable method from the application class (that we extend). This method I am pretty sure is called when
+    // launch() is called.
     @Override
     public void start(Stage primaryStage) throws Exception{
+        //sets title of primary stage (basically the title of the window
         primaryStage.setTitle("Hello World");
+
+        //initialize our two controllers
         SceneTwoController sceneTwo = new SceneTwoController();
         HomeSceneController homeScene = new HomeSceneController();
+
+        //add our two controllers to the list we instantiated above. I am also explicitly casting them as PageControllers
         controllers.add((PageController)sceneTwo);
         controllers.add((PageController)homeScene);
 
-        primaryStage.setScene(new Scene(defaultRoot));
+        //Sets the initial scene and root of the primary stage. These will be overriden momentarily
+        primaryStage.setScene(new Scene(new StackPane()));
+        //calling the mount method (remember that from the PageController interface?). This will load our homeScene as the root FXML
         homeScene.mount(primaryStage);
+        //show the stage. yeah.
         primaryStage.show();
 
     }
 
-
-//    @FXML void handleSubmitButtonAction(ActionEvent event) {
-//        String data = "test";
-//        try {
-//            data = DBConnect.yoink();
-//            System.out.println(data);
-//        } catch(Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//
-//    }
-
+    //Getter function that returns our list of controllers
     public static List<PageController> getAllControllers(){
         return controllers;
     }
