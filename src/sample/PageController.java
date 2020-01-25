@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 public interface PageController {

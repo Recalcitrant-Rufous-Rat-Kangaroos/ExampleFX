@@ -4,77 +4,74 @@ import java.sql.*;
 
 public class DBConnect
 {
-    private static Connection conn = null;
-    private static Statement stmt = null;
+    private static Connection conn = null; //Connection is an interface (ie we cannot instantiate it
+    private static Statement statement = null; //This is also an interface
     private static ResultSet rslt = null;
+
+    private static String url = "jdbc:derby:secondDB;create=true";
+    private static String userName = "admin";
+    private static String password = "Password";
 
     public static void setUpDB() throws Exception
     {
         try
         {
+            //Class.forName loads a class
+            // We need to load the driver class
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            conn = DriverManager.getConnection(url, userName, password);
+            statement = conn.createStatement();
         }
-        catch(ClassNotFoundException e)
-        {
-            e.printStackTrace();
-            throw e;
-        }
-        try
-        {
-            conn = DriverManager.getConnection("jdbc:derby:testDB;create=true");
-            stmt = conn.createStatement();
-        }
-        catch(SQLException e)
+        catch(Exception e)
         {
             e.printStackTrace();
             throw e;
         }
     }
-    public static void createSampleTable()  throws Exception
+
+    public static void createTable(String tableName, String data) throws Exception
     {
         try
         {
-            stmt.execute("CREATE TABLE students(" +
-                    "identification int," +
-                    "name VARCHAR(100)," +
-                    "age int)");
-        }
-        catch(SQLException e)
-        {
+            DatabaseMetaData meta = conn.getMetaData();
 
-            if(e.getErrorCode() == 30000){} else
-            {
-                e.printStackTrace();
-                throw e;
+            //When searching for strings, use the String.toUpperCase() function. Because SQL is bullshit
+            ResultSet eqTables = meta.getTables(null, null, tableName.toUpperCase(), null);
+            if(eqTables.next()){
+                System.out.println("This table already exists");
+            } else {
+                statement.execute("CREATE TABLE " + tableName + data);
             }
-        }
-
-        try
-        {
-          //  stmt.execute("SELECT * FROM students");
-            stmt.executeUpdate("INSERT INTO students VALUES (1, 'billy', 15)");
-//            rslt = stmt.getGeneratedKeys();
-//            for(int i = 0; rslt.next(); i++)
-//            {
-//                System.out.println(rslt.getInt(i));
-//            }
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
+        } catch (Exception e) {
             throw e;
         }
     }
 
-    public static String yoink() throws Exception{
+    public static void addRow(String tableName, String data) throws Exception
+    {
         try{
-            stmt.executeQuery("SELECT name FROM students");
-            rslt = stmt.getGeneratedKeys();
-            return rslt.toString();
+            statement.executeUpdate("INSERT INTO " + tableName.toUpperCase() + " VALUES " + data);
         } catch(Exception e){
             throw e;
-            //throw new Exception("It didn't work");
         }
+    }
+
+    public static String getName(int row) throws Exception
+    {
+        try{
+            ResultSet results = statement.executeQuery("SELECT SPECIES FROM ALIENS");
+            int rowIndex = 1;
+            while(results.next()){
+                if(rowIndex == row){
+                    return results.toString();
+                }
+                rowIndex++;
+            }
+            throw(new Exception("Species not found"));
+        } catch(Exception e){
+            throw e;
+        }
+
     }
 
 }
