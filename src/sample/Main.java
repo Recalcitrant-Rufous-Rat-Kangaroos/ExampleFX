@@ -19,6 +19,7 @@ public class Main {
         RootController scene = new RootController();
         System.out.println("John");
         System.out.println("John2");
+        System.out.println("John3");
 
         //Run launchScene method we created in the root controller class
         scene.launchScene(args);
