@@ -7,7 +7,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-
+        System.out.println("xx");
         //Do not worry about the DB stuff right now
         try{DBConnect.setUpDB();}catch(Exception e){e.printStackTrace();};
         try{DBConnect.createTable("aliens", "(species VARCHAR(100), age int)");}catch(Exception e){e.printStackTrace();};
