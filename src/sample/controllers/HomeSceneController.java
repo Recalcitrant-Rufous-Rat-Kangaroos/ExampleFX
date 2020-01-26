@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import sample.PageController;
 
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.util.ResourceBundle;
 
 public class HomeSceneController implements PageController, Initializable {
@@ -62,6 +63,7 @@ public class HomeSceneController implements PageController, Initializable {
         } catch(Exception e){
             // I am slowly losing my shit
             System.out.println("Do a barrel roll");
+            System.out.println("WPI canvas");
             e.printStackTrace();
         }
 
