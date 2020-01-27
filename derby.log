@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Sun Jan 26 02:43:44 EST 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-016f-e0ce-749f-00000e7577f0 
+Mon Jan 27 17:39:52 EST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-016f-e929-41a4-00000e7451c8 
 on database directory C:\Users\LJN\IdeaProjects\ExampleFX\secondDB with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
 Loaded from file:/C:/Users/LJN/IdeaProjects/ExampleFX/src/lib/derby.jar
 java.vendor=Oracle Corporation

@@ -16,12 +16,12 @@ public class Main {
 
 
         //Initialize new scene using the root controller class we made
-        RootController scene = new RootController();
+        RootController stage = new RootController();
         System.out.println("John");
         System.out.println("John2");
         System.out.println("John3");
 
         //Run launchScene method we created in the root controller class
-        scene.launchScene(args);
+        stage.launchScene(args);
     }
 }

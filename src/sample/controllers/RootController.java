@@ -18,7 +18,7 @@ public class RootController extends Application {
     //This method calls the launch() function that is included in the application class. I am not sure
     // exactly what launch all does, but I am pretty sure it calls the start() method down below. Basically, we call it
     // when we want to start our application
-    public static void launchScene(String[] args){
+    public void launchScene(String[] args){
         launch(args);
     }
 
@@ -32,16 +32,17 @@ public class RootController extends Application {
         //initialize our two controllers
         SceneTwoController sceneTwo = new SceneTwoController();
         HomeSceneController homeScene = new HomeSceneController();
-
+        JohnDemo johnScene = new JohnDemo();
         //add our two controllers to the list we instantiated above. I am also explicitly casting them as PageControllers
-        controllers.add((PageController)sceneTwo);
-        controllers.add((PageController)homeScene);
-
-        //Sets the initial scene and root of the primary stage. These will be overriden momentarily
+//        controllers.add((PageController)sceneTwo);
+//        controllers.add((PageController)homeScene);
+//
+//        //Sets the initial scene and root of the primary stage. These will be overriden momentarily
         primaryStage.setScene(new Scene(new StackPane()));
-        //calling the mount method (remember that from the PageController interface?). This will load our homeScene as the root FXML
-        homeScene.mount(primaryStage);
+//        //calling the mount method (remember that from the PageController interface?). This will load our homeScene as the root FXML
+//        homeScene.mount(primaryStage);
         //show the stage. yeah.
+        johnScene.mount(primaryStage);
         primaryStage.show();
 
     }
